@@ -1,0 +1,222 @@
+<style lang="less">
+  .top{
+    width: 100vw;
+    height:40vh;
+    background: linear-gradient(to  right, #1dd1a1, #22cab1, #24bec3);
+
+  }
+  .body{
+    height:60vh;
+    width: 100vw;
+
+  }
+  .top_user{
+    height:30%;
+    width: 100vw;
+
+  }
+  .top_user_1{
+    float: left;
+    margin-left: 20px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+  .top_user_2{
+    float: left;
+    margin-left: 10px;
+    height: 50px;
+    width: 200px;
+
+  }
+  .top_user_2_1,.top_user_2_2{
+    height: 50%;
+    width: 200px;
+
+  }
+  .top_user_setp{
+    height:30%;
+    width: 100vw;
+    display: flex;
+  }
+  .top_user_setp_1{
+    flex: 2;
+    border-right: #ffffff solid 0.5px;
+  }
+  .top_user_setp_2{
+    flex: 2;
+
+  }
+  .top_user_setp_1_1,.top_user_setp_1_2{
+    height:50%;
+    width: 100%;
+
+    text-align: center;
+  }
+  .top_user_setp_2_1,.top_user_setp_2_2{
+    height:50%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .top_index{
+    display: flex;
+    height:35%;
+    width: 90vw;
+    margin-left: 5vw;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding-top: 15px;
+  }
+  .top_index_1,.top_index_2{
+    flex:2;
+    width: 45vw;
+    padding-bottom: 50px;
+    align-content: center;
+  }
+  .top_index_1_1{
+    width: 40px;
+    height: 40px;
+
+    margin: auto;
+  }
+  .top_index_1_2{
+    width: 70%;
+    height: 10px;
+    text-align: center;
+    margin: auto;
+
+  }
+  .top_index_2_1{
+    width: 40px;
+    height: 40px;
+
+    margin: auto;
+
+  }
+  .top_index_2_2{
+    width: 70%;
+    height: 10px;
+    text-align: center;
+    margin: auto;
+  }
+  .sizeModal-img{
+    width: 40px;
+    height: 40px;
+  }
+  .body_info{
+    width: 90vw;
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 10px;
+    margin-left: 5vw;
+  }
+  .product-img{
+    width: 90vw;
+    height: 70px;
+    border-radius: 10px;
+    border: #353535 1px solid;
+  }
+</style>
+<template>
+  <view class="top">
+    <view class="top_user">
+      <view class="top_user_1">
+      </view>
+      <view class="top_user_2">
+        <view class="top_user_2_1">
+          刘紫裕
+        </view>
+        <view class="top_user_2_2">
+          已经连续签到X天
+        </view>
+      </view>
+    </view>
+    <view class="top_user_setp">
+      <view class="top_user_setp_1">
+        <view class="top_user_setp_1_1">
+          13200.00
+        </view>
+        <view class="top_user_setp_1_2">
+          捐赠步数
+        </view>
+      </view>
+      <view class="top_user_setp_2">
+        <view class="top_user_setp_2_1">
+          0
+        </view>
+        <view class="top_user_setp_2_2">
+          邀请好友数
+        </view>
+      </view>
+
+    </view>
+
+    <view class="top_index">
+      <view class="top_index_1">
+        <view class="top_index_1_1">
+          <image class='sizeModal-img' src='../images/cjwt.png'></image>
+        </view>
+        <view class="top_index_1_2">
+          常见问题
+        </view>
+
+      </view>
+      <view class="top_index_2">
+        <view class="top_index_2_1">
+          <image class='sizeModal-img' src='../images/lxwm.png'  ></image>
+        </view>
+        <view class="top_index_2_2">
+          联系我们
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="body">
+    <view wx:for="{{firstList}}">
+      <view class='body_info'>
+        <image class='product-img' mode="aspectFill" src='../images/shouji.png'></image>
+      </view>
+    </view>
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    // 页面配置
+    config = {
+      'navigationBarTitleText': '步步为赢'
+    };
+
+    // 声明页面中将要使用到的组件
+    components = {
+    };
+    methods = {
+      pagechange (e) {
+        let self = this
+        if (e.detail.source === 'touch') {
+          let currentPageIndex = this.data.currentIndex
+          currentPageIndex = (currentPageIndex + 1) % 2
+          self.currentIndex = currentPageIndex
+          self.$apply()
+        }
+      },
+      // 用户点击tab时调用
+      titleClick  (e) {
+        let self = this
+        self.currentIndex = e.currentTarget.dataset.idx
+        self.$apply()
+      }
+    }
+    // 可用于页面模板中绑定的数据
+    data = {
+      currentIndex: 0,
+      'firstList': ['LXT', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF'],
+      'secondList': ['GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF']
+    }
+  }
+</script>

@@ -1,0 +1,196 @@
+<style lang="less">
+  .body{
+    width: 100vw;
+    border: #353535 1px solid;
+  }
+  .ads{
+    height:20vh;
+    width: 100vw;
+    border: #353535 1px solid;
+  }
+
+
+  .container {
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .title {
+    width: 100%;
+    height: 88rpx;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .titleSel {
+    color: #5f6fee;
+    font-size: 32rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .titleUnsel {
+    color: #858fab;
+    font-size: #858fab;
+  }
+
+  .headerLineSel {
+    background: #5f6fee;
+    height: 6rpx;
+    width: 40rpx;
+    position: relative;
+    margin-top: 10rpx;
+  }
+
+  .headerLineUnsel {
+    background: #fff;
+    height: 6rpx;
+    width: 40rpx;
+    position: relative;
+    margin-top: 10rpx;
+  }
+
+  .swiper {
+    width: 100%;
+    flex: 1;
+    height: 55vh;
+    overflow: scroll;
+  }
+
+  .recordItem {
+    display:flex;
+    height: 50px;
+     margin-top:5px ;
+    background-color: white;
+
+  }
+
+  .bottom{
+    display: flex;
+    height:10vh;
+    width: 100vw;
+    border: #353535 1px solid;
+    justify-content: center;   /*水平居中*/
+    align-items: center;     /*垂直居中*/
+    border: #353535 1px solid;
+  }
+  .bottomButton{
+    height:30px;
+    width: 50vw;
+    border: #353535 1px solid;
+    text-align: center;
+    line-height: 30px;
+  }
+  .tab{
+    display:flex;
+    height:20px;
+    width: 100vw;
+    border: #353535 1px solid;
+  }
+  .tab_1,.tab_2,.tab_3{
+      flex: 3;
+      height:20px;
+      text-align: center;
+
+    }
+  .tab_1_info,.tab_2_info,.tab_3_info{
+    flex: 3;
+    height:50px;
+    text-align: center;
+    line-height: 50px;
+    border: #353535 1px solid;
+  }
+</style>
+<template>
+  <view class="ads">
+    <viwe></viwe>
+  </view>
+  <view class="body">
+    <view class='container'>
+      <!--Tab布局-->
+      <view class='title'>
+        <view class='titleSel' @tap='titleClick' data-idx='0'>
+          <text>好友排行</text>
+          <hr class="{{0 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}}" />
+        </view>
+
+        <view class='titleSel' @tap='titleClick' data-idx='1'>
+          <text>活动排名</text>
+          <hr class="{{1 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} " />
+        </view>
+      </view>
+      <view class='tab'>
+        <view class='tab_1'>用户排名</view>
+        <view class='tab_2'>捐赠步数</view>
+        <view class='tab_2'>今日签到</view>
+      </view>
+      <!--内容布局-->
+      <swiper class='swiper' @change='pagechange' current='{{currentIndex}}'>
+        <swiper-item class='swiper'>
+          <view wx:for="{{firstList}}" class='recordItem'>
+            <view class='tab_1_info'>{{item}}</view>
+            <view class='tab_2_info'>{{item}}</view>
+            <view class='tab_2_info'>{{item}}</view>
+          </view>
+        </swiper-item>
+        <swiper-item class='swiper' class='swiper'>
+          <view wx:for="{{secondList}}" class='recordItem'>
+            <view class='tab_1_info'>{{item}}</view>
+            <view class='tab_2_info'>{{item}}</view>
+            <view class='tab_2_info'>{{item}}</view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <view class="bottom">
+    <viwe class="bottomButton">
+        邀请好友！
+    </viwe>
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    // 页面配置
+    config = {
+      'navigationBarTitleText': '步步为赢'
+    };
+
+    // 声明页面中将要使用到的组件
+    components = {
+    };
+    methods = {
+      pagechange (e) {
+        let self = this
+        if (e.detail.source === 'touch') {
+          let currentPageIndex = this.data.currentIndex
+          currentPageIndex = (currentPageIndex + 1) % 2
+          self.currentIndex = currentPageIndex
+          self.$apply()
+        }
+      },
+      // 用户点击tab时调用
+      titleClick  (e) {
+        let self = this
+        self.currentIndex = e.currentTarget.dataset.idx
+        self.$apply()
+      }
+    }
+    // 可用于页面模板中绑定的数据
+    data = {
+      currentIndex: 0,
+      'firstList': ['LXT', 'LXT', 'LXT', 'LXT', 'LXT', 'LXT'],
+      'secondList': ['GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF', 'GFF']
+    }
+  }
+</script>

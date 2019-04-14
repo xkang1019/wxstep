@@ -1,0 +1,121 @@
+<style lang="less">
+  .body{
+    height: 60vh;
+    width: 100vw;
+    border: #353535 1px solid;
+  }
+  .body_1{
+    display: flex;
+    height: 10%;
+    width: 100vw;
+    border: #353535 1px solid;
+  }
+  .body_2{
+    display: flex;
+    height: 60%;
+    width: 100vw;
+    border: #353535 1px solid;
+    justify-content: center;   /*水平居中*/
+
+  }
+  .body_3{
+    display: flex;
+    height: 10%;
+    width: 100vw;
+    border: #353535 1px solid;
+    justify-content: center;   /*水平居中*/
+    align-items: center;     /*垂直居中*/
+  }
+  .body_4{
+    display: flex;
+
+    height: 10%;
+    width: 100vw;
+    border: #353535 1px solid;
+    justify-content: center;   /*水平居中*/
+    align-items: center;     /*垂直居中*/
+  }
+  .left{
+    flex: 1;
+    height: 25px;
+    width: 30vw;
+    border: #353535 1px solid;
+  }
+  .rigth{
+    flex: 1;
+    text-align: right;
+    height: 25px;
+    width: 30vw;
+    border: #353535 1px solid;
+  }
+  .totalSetp{
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    margin:  auto;
+    border: #353535 1px solid;
+    background: linear-gradient(to  right, #1dd1a1, #22cab1, #24bec3);
+  }
+  .shareSetp{
+    width: 100vw;
+    height: 20px;
+    border: #353535 1px solid;
+  }
+  .setp{
+    width: 100vw;
+    height: 20px;
+    border: #353535 1px solid;
+  }
+  .ads{
+    height:40vh;
+    width: 100vw;
+    border: #353535 1px solid;
+  }
+</style>
+<template>
+  <view class="body">
+    <viwe class="body_1">
+         <viwe class="left">
+          连续签到X天
+         </viwe>
+         <viwe class="rigth">
+          了解步数!
+         </viwe>
+    </viwe>
+    <viwe class="body_2">
+      <viwe class="totalSetp">
+      </viwe>
+    </viwe>
+    <viwe class="body_3">
+        今天步数
+    </viwe>
+    <viwe class="body_4">
+        邀请好友
+    </viwe>
+  </view>
+  <view class="ads">
+    <viwe></viwe>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    // 页面配置
+    config = {
+      'navigationBarTitleText': '步步为赢'
+    };
+
+    // 声明页面中将要使用到的组件
+    components = {
+    };
+
+    // 可用于页面模板中绑定的数据
+    data = {
+      myNum: 50,
+      syncNum: 100,
+      items: [1, 2, 3, 4]
+    }
+  }
+</script>
